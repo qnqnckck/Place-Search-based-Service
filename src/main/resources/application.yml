@@ -1,0 +1,41 @@
+# Spring Properties
+spring:
+  profiles:
+    active: local # set default profile
+
+# CircuitBreaker
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        failureRateThreshold: 50
+        slowCallRateThreshold: 100
+        slowCallDurationThreshold: 60000
+        permittedNumberOfCallsInHalfOpenState: 4
+        maxWaitDurationInHalfOpenState: 8000
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 10
+        waitDurationInOpenState: 10000
+    instances:
+      kakao:
+        baseConfig: default
+      naver:
+        baseConfig: default
+
+
+# External Api
+external:
+  kakao:
+    host: https://dapi.kakao.com
+    uri:
+      keyword-search: /v2/local/search/keyword.json
+    max-count: 10
+    api-key: "KakaoAK 8a1fc355ec8f1ea41603629966eda96f"
+  naver:
+    host: https://openapi.naver.com
+    uri:
+      keyword-search: /v1/search/local.json
+    max-count: 5      # naver 검색 제한 갯수 5(Api spec)
+    client-id: PLlTHKUsjpeQJ_zAh0WX
+    client-secret: MQh6tlJAZR

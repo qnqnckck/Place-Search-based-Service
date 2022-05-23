@@ -1,0 +1,23 @@
+###
+### 검색어 랭킹 검색
+GET http://localhost:8080/search/rank/v1
+Accept: application/json
+
+###
+### 장소 검색
+GET http://localhost:8080/place/search/v1
+Accept: application/json
+
+###
+### 장소 검색
+GET http://localhost:8080/place/search/v1?keyword=곱창4
+Accept: application/json
+###
+### 장소 검색
+GET http://localhost:8080/place/search/v1?keyword=곱창5
+Accept: application/json
+
+###
+### 장소 검색
+GET http://localhost:8080/place/search/v1?keyword=곱창4961
+Accept: application/json
