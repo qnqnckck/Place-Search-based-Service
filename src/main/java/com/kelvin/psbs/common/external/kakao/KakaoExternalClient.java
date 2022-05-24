@@ -58,7 +58,9 @@ public class KakaoExternalClient implements ExternalClient {
                 .map(result -> result.stream().map(this::convert).collect(Collectors.toList()));
     }
 
-    public PlaceMetaInfo convert(KakaoKeywordSearchDocuments kakaoKeywordSearchDocuments) {
+    @Override
+    public PlaceMetaInfo convert(Object o) {
+        KakaoKeywordSearchDocuments kakaoKeywordSearchDocuments = (KakaoKeywordSearchDocuments) o;
         return new PlaceMetaInfo(kakaoKeywordSearchDocuments.getPlaceName(), kakaoKeywordSearchDocuments.getRoadAddressName());
     }
 

@@ -1,5 +1,6 @@
 package com.kelvin.psbs.common.external.naver;
 
+import com.kelvin.psbs.common.external.ExternalClient;
 import com.kelvin.psbs.common.external.naver.dto.NaverKeywordSearchItems;
 import com.kelvin.psbs.common.external.naver.dto.NaverKeywordSearchResponse;
 import com.kelvin.psbs.controller.vo.PlaceMetaInfo;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class NaverExternalClient {
+public class NaverExternalClient implements ExternalClient {
 
     private final WebClient webClient;
 
@@ -64,16 +65,16 @@ public class NaverExternalClient {
                 .map(NaverKeywordSearchResponse::getItems)
                 .map(result -> result.stream().map(this::convert).collect(Collectors.toList()))
                 .onErrorResume(e -> {
-                    log.error("!!!!!!!!!!");
                     return Mono.just(new ArrayList<>());
                 });
     }
 
-    public PlaceMetaInfo convert(NaverKeywordSearchItems naverKeywordSearchItems) {
+    public PlaceMetaInfo convert(Object o) {
+        NaverKeywordSearchItems naverKeywordSearchItems = (NaverKeywordSearchItems) o;
         return new PlaceMetaInfo(naverKeywordSearchItems.getTitle(), naverKeywordSearchItems.getRoadAddress());
     }
+
     private Mono<List<PlaceMetaInfo>> fallback(Throwable t) {
-        log.error("??????????");
         log.error("naver fallback : " + t.getMessage());
         return Mono.empty();
     }

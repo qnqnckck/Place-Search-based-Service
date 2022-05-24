@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ExternalClient {
     Mono<List<PlaceMetaInfo>> search(String keyword);
+    PlaceMetaInfo convert(Object o);
 }

@@ -18,28 +18,28 @@ $ ./gradlew clean bootRun
 ```
 
 * API 호출
-  * Intellij에서 api.http 파일내 API를 호출합니다.
+  * Intellij에서 api.http 파일내 API를 호출
   * Swagger 접속
     * http://localhost:8080/swagger-ui.html 접속 후 API 규격 확인 및 호출
     
 
 * 테스트 방법
-  * 실시간 검색어 랭킹 전 키워드 장소 검색 API를 호출합니다.
-  * 동일 키워드로 장소 검색 API를 호출합니다.
-  * 실시간 검색 키워드 Top 10 API를 호출합니다.
+  * 실시간 검색어 랭킹 전 키워드 장소 검색 API를 호출
+  * 동일 키워드로 장소 검색 API를 호출
+  * 실시간 검색 키워드 Top 10 API를 호출
   
 ## Description  
  해당 프로젝트를 진행하면서 고민했던 포인트들을 함께 설명합니다.
 ### 전체 시스템 Architecture
 기능을 구현할 서버(API Server) 이외에 전체 아키텍처를 고민하여 개발 범위를 산정하였습니다.
 * 1안
-  * ![architecture1](https://user-images.githubusercontent.com/10949665/169941418-a86460d1-69f4-475d-be19-0e16856b5858.png)
+  * ![architecture1](https://user-images.githubusercontent.com/10949665/170044674-568ec367-168b-426f-99e1-0c7551e55b07.png)
     * API Server에 대한 키워드 요청에 대한 로그 수집을 ELK를 활용합니다.
     * 검색어 랭킹의 경우 실시간으로 데이터의 정확성이 보장 될 필요가 없으므로 기반시스템 구성에 Jenkins 배치를 통해 주기적으로 Redis에 업데이트하여 랭킹을 제공합니다.
     
 
 * 2안
-  * ![architecture2](https://user-images.githubusercontent.com/10949665/169941409-016d27c8-136b-48f2-9b29-fe9b6a715b2f.png)
+  * ![architecture2](https://user-images.githubusercontent.com/10949665/170044658-bfa54706-44a2-4d98-85d6-d794f762990b.png)
     * 실시간 랭킹을 제공하기 위한 방법으로 Redis Sorted Set(Zset) 기능을 사용합니다.
     * 요청이 올때마다 Redis에 업데이트하여 랭킹을 산정합니다.
     * 문제 발생시 랭킹에 대한 데이터 보존을 위한 Snapshot으로 배치를 통해 DB에 저장합니다.
@@ -56,6 +56,13 @@ $ ./gradlew clean bootRun
 * 외부연동 추가에 따른 코드 내 기능 확정성 고려
   * 외부연동을 하는 모듈의 경우  common 내  external 패키지에서 타겟별(카카오,네이버등)을 분리하여 구현하였습니다. 구글이 추가되는 경우 external의 대상을 추가하고 service에서 호출하는 구조로 작성하여 최소한의 변경점을 두었습니다.
   
+### 장소 검색시 시나리오 정의
+* 장소 검색의 결과가 도로명이 동일한 경우 같은 장소로 취급
+  * 위도 경도로 하지 않는 이유
+    * 네이버에서 사용하는 카텍 좌표계를 변환하더라도 위도, 경도와 동일하지 않을 수 있기 때문에
+  * 이름을 동일장소 조건에 포함하지 않는 이유
+    * 띄어쓰기 구분 및 장소명도 동일하게 등록되지 않은 곳도 많기 때문에
+
 ## IMPLEMENTATION
 ***
 ### 기술스택
@@ -81,8 +88,3 @@ $ ./gradlew clean bootRun
 * spring.profiles.active
     * default : local (개발 환경 기준으로 초기 설정)
 
-
-## 추가 시나리오 및 기능 (개발 예정)
-* 로그인 유저만 키워드 장소 검색 API를 호출할수 있다.
-  * JWT 활용 
-  * JPA 사용하여 사용자별 요청 키워드 로그 기록
