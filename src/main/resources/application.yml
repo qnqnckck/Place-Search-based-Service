@@ -2,6 +2,10 @@
 spring:
   profiles:
     active: local # set default profile
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher # for swagger
+
 
 # CircuitBreaker
 resilience4j:
@@ -39,3 +43,4 @@ external:
     max-count: 5      # naver 검색 제한 갯수 5(Api spec)
     client-id: PLlTHKUsjpeQJ_zAh0WX
     client-secret: MQh6tlJAZR
+

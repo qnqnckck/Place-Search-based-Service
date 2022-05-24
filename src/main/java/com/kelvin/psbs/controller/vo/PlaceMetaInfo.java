@@ -1,5 +1,6 @@
 package com.kelvin.psbs.controller.vo;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,10 @@ import java.io.Serializable;
 @ToString
 @AllArgsConstructor
 public class PlaceMetaInfo implements Serializable {
+
+    @ApiModelProperty(example = "이름")
     public String title;
+    @ApiModelProperty(example = "도로명")
     public String roadAddress;
 
     @Override

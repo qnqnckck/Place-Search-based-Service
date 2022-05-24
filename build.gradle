@@ -21,17 +21,20 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
 
 	// Embedded redis server
-	implementation group: 'it.ozimov', name: 'embedded-redis', version: '0.7.1'
+	implementation 'it.ozimov:embedded-redis:0.7.1'
 
 	// Circuit Breaker
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	implementation 'io.github.resilience4j:resilience4j-spring-boot2:1.7.1'
 	implementation 'io.github.resilience4j:resilience4j-reactor:1.7.1'
+
+	// Swagger
+	implementation 'io.springfox:springfox-swagger2:2.9.2'
+	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'

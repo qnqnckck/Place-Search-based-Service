@@ -5,19 +5,15 @@ Accept: application/json
 
 ###
 ### 장소 검색
-GET http://localhost:8080/place/search/v1
+GET http://localhost:8080/place/search/v1?keyword=곱창
 Accept: application/json
 
 ###
 ### 장소 검색
-GET http://localhost:8080/place/search/v1?keyword=곱창4
-Accept: application/json
-###
-### 장소 검색
-GET http://localhost:8080/place/search/v1?keyword=곱창5
+GET http://localhost:8080/place/search/v1?keyword=막창
 Accept: application/json
 
-###
+###ㅇ
 ### 장소 검색
-GET http://localhost:8080/place/search/v1?keyword=곱창4961
+GET http://localhost:8080/place/search/v1?keyword=대창
 Accept: application/json
