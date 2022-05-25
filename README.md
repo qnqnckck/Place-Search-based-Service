@@ -10,7 +10,6 @@
 
 
 ## Usage
-*** 
 * 프로젝트 실행
   * 프로젝트 폴더에서 아래 명령을 수행하여 서버를 동작시킵니다.
 ```sh
@@ -64,7 +63,6 @@ $ ./gradlew clean bootRun
     * 띄어쓰기 구분 및 장소명도 동일하게 등록되지 않은 곳도 많기 때문에
 
 ## IMPLEMENTATION
-***
 ### 기술스택
   * springboot
   * webflux : webclient를 사용하여 non-blocking 외부연동
